@@ -26,7 +26,8 @@ pipeline {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
 
                 // Run Maven on a Unix agent.
-                sh "sbt -Dsbt.log.noformat=true clean dist"
+                sh '''grep \'^VERSION\' /etc/os-release
+                egrep \'^(VERSION|NAME)=\' /etc/os-release'''
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
