@@ -25,9 +25,14 @@ pipeline {
                 // Get some code from a GitHub repository
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
 
+                sh '''  curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb &&
+                  dpkg -i sbt-$SBT_VERSION.deb &&
+                  rm sbt-$SBT_VERSION.deb &&
+                  apt-get update &&
+                  apt-get install sbt rpm -y'''
+
                 // Run Maven on a Unix agent.
-                sh '''grep \'^VERSION\' /etc/os-release
-                egrep \'^(VERSION|NAME)=\' /etc/os-release'''
+                sh 'sbt clean dist'
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
