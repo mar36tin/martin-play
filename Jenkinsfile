@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    environment {
-        SCALA_VERSION = "2.12.4"
-        SCALA_HOME = "/usr/share/scala"
-    }
+//     environment {
+//         SCALA_VERSION = "2.12.4"
+//         SCALA_HOME = "/usr/share/scala"
+//     }
     stages {
 //         stage('Setting Up'){
 //             steps {
